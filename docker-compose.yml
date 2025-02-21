@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: todo-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: tododb
+      MYSQL_USER: todouser
+      MYSQL_PASSWORD: todopassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql-data:/var/lib/mysql
+    networks:
+      - todo-network
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/api/Dockerfile
+    container_name: todo-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=mysql;Database=tododb;User=todouser;Password=todopassword;
+    ports:
+      - "5000:80"
+    depends_on:
+      - mysql
+    networks:
+      - todo-network
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/web/Dockerfile
+    container_name: todo-web
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+    networks:
+      - todo-network
+
+volumes:
+  mysql-data:
+
+networks:
+  todo-network:
+    driver: bridge
