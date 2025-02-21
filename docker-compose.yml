@@ -10,7 +10,7 @@ services:
       MYSQL_USER: todouser
       MYSQL_PASSWORD: todopassword
     ports:
-      - "3306:3306"
+      - "3307:3306"  # Change host port from 3306 to 3307
     volumes:
       - ./docker/db/init.sql:/docker-entrypoint-initdb.d/init.sql
       - mysql-data:/var/lib/mysql
@@ -26,7 +26,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=mysql;Database=tododb;User=todouser;Password=todopassword;
     ports:
-      - "5000:80"
+      - "5001:80"  # Change host port from 5000 to 5001
     depends_on:
       - mysql
     networks:
@@ -38,7 +38,7 @@ services:
       dockerfile: docker/web/Dockerfile
     container_name: todo-web
     ports:
-      - "3000:80"
+      - "3001:80"  # Change host port from 3000 to 3001
     depends_on:
       - api
     networks:
