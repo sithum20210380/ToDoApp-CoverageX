@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zxoQk7YCoyY=",
+  "dgSpecHash": "Q/kPo433xo0=",
   "success": true,
   "projectFilePath": "/Users/sithumraveesha/Documents/GitHub/SwiftProjects/ToDoApp-CoverageX/src/TodoApp.Core/TodoApp.Core.csproj",
-  "expectedPackageFiles": [
-    "/Users/sithumraveesha/.nuget/packages/microsoft.netcore.app.ref/8.0.11/microsoft.netcore.app.ref.8.0.11.nupkg.sha512",
-    "/Users/sithumraveesha/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.11/microsoft.aspnetcore.app.ref.8.0.11.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

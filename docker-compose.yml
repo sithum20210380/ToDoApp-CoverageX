@@ -39,6 +39,8 @@ services:
     container_name: todo-web
     ports:
       - "3001:80"  # Change host port from 3000 to 3001
+    volumes:
+      - ./src/TodoApp.Web:/app
     depends_on:
       - api
     networks:
