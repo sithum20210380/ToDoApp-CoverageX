@@ -146,10 +146,8 @@ ToDoApp-CoverageX/
 dotnet test
 
 # Run specific test project
-dotnet test tests/TodoApp.Api.Tests
+dotnet test ./tests/TodoApp.Api.Tests/TodoApp.Api.Tests.csproj
 
-# Generate coverage report
-dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 ```
 
 ### Running Frontend Tests
