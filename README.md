@@ -54,7 +54,7 @@ A full-stack todo application built with .NET 7, React, and MySQL using Docker c
 ## Project Structure
 
 ```
-todo-application/
+ToDoApp-CoverageX/
 ├── src/
 │   ├── TodoApp.Api/           # Backend .NET API project
 │   ├── TodoApp.Core/          # Core business logic and entities
@@ -88,8 +88,8 @@ todo-application/
    MYSQL_DATABASE=tododb
    MYSQL_USER=todouser
    MYSQL_PASSWORD=todopassword
-   API_PORT=5000
-   WEB_PORT=3000
+   API_PORT=5001
+   WEB_PORT=3001
    ```
 
 3. Build and run the application:
@@ -176,12 +176,12 @@ The API documentation is available through Swagger UI at http://localhost:5000/s
   - Environment variables configured in `.env`
 
 - **API Service**
-  - Port: 5000
+  - Port: 5001
   - Built from .NET 7.0 SDK
   - Auto-connects to MySQL
 
 - **Web Service**
-  - Port: 3000
+  - Port: 3001
   - Nginx server
   - Built from Node.js base image
 
