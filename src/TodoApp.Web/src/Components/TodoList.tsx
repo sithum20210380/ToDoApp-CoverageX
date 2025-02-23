@@ -9,6 +9,7 @@ import './TodoList.css';
 const { TextArea } = Input;
 const { TabPane } = Tabs;
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 interface Task {
     id: number;
     title: string;
@@ -28,7 +29,7 @@ const TodoList: React.FC = () => {
 
     const fetchTasks = async (): Promise<void> => {
         try {
-            const response = await fetch('http://localhost:5160/api/Tasks');
+            const response = await fetch(`${API_BASE_URL}/Tasks`);
             const data = await response.json();
             // Sort tasks by creation date in descending order
             const sortedData = Array.isArray(data)
@@ -63,7 +64,7 @@ const TodoList: React.FC = () => {
 
         setLoading(true);
         try {
-            await fetch('http://localhost:5160/api/tasks', {
+            await fetch(`${API_BASE_URL}/tasks`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -97,7 +98,7 @@ const TodoList: React.FC = () => {
 
     const handleComplete = async (id: number): Promise<void> => {
         try {
-            await fetch(`http://localhost:5160/api/tasks/${id}/complete`, { method: 'PUT' });
+            await fetch(`${API_BASE_URL}/tasks/${id}/complete`, { method: 'PUT' });
             fetchTasks();
             notification.success({
                 message: 'Task Completed',

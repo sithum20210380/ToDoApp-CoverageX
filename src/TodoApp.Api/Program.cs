@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using TodoApp.Core.Interfaces;
 using TodoApp.Infrastructure.Data;
-using TodoApp.Infrastructure.Repositories; 
-using TodoApp.Infrastructure.Services; 
+using TodoApp.Infrastructure.Repositories;
+using TodoApp.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +17,7 @@ builder.Services.AddDbContext<TodoDbContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     var serverVersion = ServerVersion.AutoDetect(connectionString);
-    
+
     options.UseMySql(connectionString, serverVersion, mysqlOptions =>
     {
         mysqlOptions.EnableRetryOnFailure(
@@ -35,12 +35,18 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // Configure CORS
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
-    {
-        policy.AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader();
-    });
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(80);
 });
 
 var app = builder.Build();
@@ -52,7 +58,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors();
+app.UseCors("AllowAll");
 app.UseAuthorization();
 app.MapControllers();
 

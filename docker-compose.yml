@@ -10,12 +10,19 @@ services:
       MYSQL_USER: todouser
       MYSQL_PASSWORD: todopassword
     ports:
-      - "3307:3306"  # Change host port from 3306 to 3307
+      - "3307:3306"
     volumes:
       - ./docker/db/init.sql:/docker-entrypoint-initdb.d/init.sql
       - mysql-data:/var/lib/mysql
     networks:
-      - todo-network
+      todo-network:
+        aliases:
+          - todo-mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   api:
     build:
@@ -24,13 +31,17 @@ services:
     container_name: todo-api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=mysql;Database=tododb;User=todouser;Password=todopassword;
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Server=todo-mysql;Database=tododb;User=todouser;Password=todopassword;
     ports:
-      - "5001:80"  # Change host port from 5000 to 5001
+      - "5001:80"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     networks:
-      - todo-network
+      todo-network:
+        aliases:
+          - todo-api
 
   web:
     build:
@@ -38,13 +49,15 @@ services:
       dockerfile: docker/web/Dockerfile
     container_name: todo-web
     ports:
-      - "3001:80"  # Change host port from 3000 to 3001
-    volumes:
-      - ./src/TodoApp.Web:/app
+      - "3001:80"
+    environment:
+      - API_URL=http://todo-api:80
     depends_on:
       - api
     networks:
-      - todo-network
+      todo-network:
+        aliases:
+          - todo-web
 
 volumes:
   mysql-data:
