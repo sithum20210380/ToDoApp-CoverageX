@@ -1,6 +1,8 @@
 # ToDoApp-CoverageX
 To-Do task web application for CoverageX LLC
-![Todo App Demo](src/TodoApp.Web/src/assets/Demo.gif)
+
+## Demo link - [CoverageX-demo](https://youtu.be/k7SRvkgwc8U)
+
 A full-stack todo application built with .NET 7, React, and MySQL using Docker containers.
 
 ## Table of Contents
