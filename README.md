@@ -3,7 +3,7 @@ To-Do task web application for CoverageX LLC
 
 ## Demo link - [CoverageX-demo](https://youtu.be/k7SRvkgwc8U)
 
-A full-stack todo application built with .NET 7, React, and MySQL using Docker containers.
+A full-stack todo application built with .NET 9, React, and MySQL using Docker containers.
 
 ## Table of Contents
 - [Features](#features)
@@ -30,14 +30,14 @@ A full-stack todo application built with .NET 7, React, and MySQL using Docker c
 ## Prerequisites
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [.NET SDK 7.0](https://dotnet.microsoft.com/download/dotnet/7.0)
+- [.NET SDK 9.0](https://dotnet.microsoft.com/download/dotnet/9.0)
 - [Node.js](https://nodejs.org/) (v18 or later)
 - [Git](https://git-scm.com/)
 
 ## Tech Stack
 
 - **Backend**
-  - ASP.NET Core 7.0
+  - ASP.NET Core 9.0
   - Entity Framework Core
   - MySQL
   - AutoMapper
@@ -100,9 +100,9 @@ ToDoApp-CoverageX/
    ```
 
 4. Access the application:
-   - Frontend: http://localhost:3000
-   - API: http://localhost:5000
-   - Swagger Documentation: http://localhost:5000/swagger
+   - Frontend: http://localhost:3001
+   - API: http://localhost:5001
+   - Swagger Documentation: http://localhost:5001/swagger
 
 ## Development
 
@@ -159,7 +159,7 @@ npm test
 
 ## API Documentation
 
-The API documentation is available through Swagger UI at http://localhost:5000/swagger when the application is running.
+The API documentation is available through Swagger UI at http://localhost:5001/swagger when the application is running.
 
 ### API Endpoints
 
@@ -177,7 +177,7 @@ The API documentation is available through Swagger UI at http://localhost:5000/s
 
 - **API Service**
   - Port: 5001
-  - Built from .NET 7.0 SDK
+  - Built from .NET 9.0 SDK
   - Auto-connects to MySQL
 
 - **Web Service**
